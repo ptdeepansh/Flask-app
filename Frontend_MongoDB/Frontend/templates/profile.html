@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Your Profile</title>
+
+    <style>
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f4f3ef;
+            --card: #ffffff;
+            --text: #181817;
+            --muted: #777771;
+            --border: #e7e6e1;
+            --accent: #1d1d1b;
+            --accent-hover: #383834;
+            --soft: #f8f8f5;
+            --success: #237a57;
+        }
+
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(215, 207, 184, 0.35),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(202, 211, 195, 0.35),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page {
+            width: 100%;
+            max-width: 1120px;
+            margin: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 34px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--text);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+        }
+
+        .step {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* =========================
+           MAIN CARD
+        ========================== */
+
+        .container {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            min-height: 650px;
+
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(30, 30, 25, 0.08),
+                0 3px 12px rgba(30, 30, 25, 0.03);
+
+            backdrop-filter: blur(18px);
+        }
+
+        /* =========================
+           LEFT PANEL
+        ========================== */
+
+        .intro {
+            position: relative;
+            padding: 60px 48px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #242421 0%,
+                    #30302c 55%,
+                    #42423b 100%
+                );
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            overflow: hidden;
+        }
+
+        .intro::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            top: -100px;
+            right: -100px;
+        }
+
+        .intro::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            bottom: -80px;
+            left: -70px;
+        }
+
+        .intro-content,
+        .intro-bottom {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            color: #c9c9c0;
+
+            margin-bottom: 26px;
+        }
+
+        .eyebrow span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #c7d2a7;
+        }
+
+        .intro h1 {
+            font-size: clamp(42px, 4vw, 62px);
+            line-height: 0.98;
+            letter-spacing: -3px;
+            font-weight: 600;
+
+            max-width: 430px;
+            margin-bottom: 25px;
+        }
+
+        .intro h1 em {
+            font-family: Georgia, serif;
+            font-weight: 400;
+            color: #cfd1c4;
+        }
+
+        .intro-description {
+            max-width: 390px;
+
+            font-size: 15px;
+            line-height: 1.7;
+
+            color: #bcbcb6;
+        }
+
+        .intro-bottom {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatars {
+            display: flex;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+            border: 2px solid #30302c;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-left: -7px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar:nth-child(1) {
+            background: #d9c7b5;
+            color: #40382f;
+        }
+
+        .avatar:nth-child(2) {
+            background: #b7c2b0;
+            color: #354033;
+        }
+
+        .avatar:nth-child(3) {
+            background: #c6c0d2;
+            color: #423d4e;
+        }
+
+        .members {
+            color: #aeadA7;
+            font-size: 12px;
+        }
+
+        /* =========================
+           FORM AREA
+        ========================== */
+
+        .form-section {
+            padding: 55px 58px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 34px;
+        }
+
+        .form-header h2 {
+            font-size: 27px;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            color: #44443f;
+            letter-spacing: 0.1px;
+        }
+
+        .optional {
+            color: #aaa9a2;
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            border: 1px solid var(--border);
+            background: var(--soft);
+
+            border-radius: 11px;
+
+            padding: 13px 14px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            color: var(--text);
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #aaa9a3;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #d6d5cf;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            background: white;
+            border-color: #77766f;
+
+            box-shadow:
+                0 0 0 3px rgba(40, 40, 35, 0.06);
+        }
+
+        textarea {
+            min-height: 95px;
+            resize: vertical;
+        }
+
+        /* =========================
+           FOOTER / BUTTON
+        ========================== */
+
+        .form-footer {
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .privacy {
+            max-width: 230px;
+
+            color: #999891;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            border: none;
+            background: var(--accent);
+            color: white;
+
+            padding: 14px 25px;
+
+            min-width: 155px;
+
+            border-radius: 11px;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-hover);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(20, 20, 18, 0.15);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* =========================
+           SUCCESS
+        ========================== */
+
+        .success {
+            display: none;
+
+            margin-top: 18px;
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            background: #edf8f2;
+            color: var(--success);
+
+            font-size: 13px;
+            font-weight: 600;
+
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 850px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .intro {
+                min-height: 420px;
+                padding: 42px 34px;
+            }
+
+            .intro h1 {
+                font-size: 46px;
+            }
+
+            .form-section {
+                padding: 42px 34px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 12px;
+            }
+
+            .topbar {
+                margin-bottom: 20px;
+            }
+
+            .container {
+                border-radius: 20px;
+            }
+
+            .intro {
+                min-height: 390px;
+                padding: 34px 25px;
+            }
+
+            .intro h1 {
+                font-size: 42px;
+                letter-spacing: -2px;
+            }
+
+            .form-section {
+                padding: 32px 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .privacy {
+                max-width: none;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">DC</div>
+                <span>Deep Cloud</span>
+            </div>
+
+            <div class="step">
+                Step 01 / 01
+            </div>
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="container">
+
+            <!-- INTRODUCTION -->
+            <section class="intro">
+
+                <div class="intro-content">
+
+                    <div class="eyebrow">
+                        <span></span>
+                        Personal profile
+                    </div>
+
+                    <h1>
+                        Tell us a little
+                        <em>about you.</em>
+                    </h1>
+
+                    <p class="intro-description">
+                        A few simple details help us create a more 
+                        experience for you. It only takes a minute to complete.
+                    </p>
+
+                </div>
+
+
+                <div class="intro-bottom">
+
+                    <div class="avatars">
+                        <div class="avatar">OM</div>
+                        <div class="avatar">AK</div>
+                        <div class="avatar">GS</div>
+                    </div>
+
+                    <div class="members">
+                        Join a growing community of people.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FORM -->
+            <section class="form-section">
+
+                <div class="form-header">
+                    <h2>Your basic details</h2>
+
+                    <p>
+                        Keep it simple. You can always update your information
+                        later from your profile.
+                    </p>
+                </div>
+
+
+                <form id="profileForm">
+
+                    <div class="form-grid">
+
+                        <!-- FIRST NAME -->
+                        <div class="form-group">
+                            <label for="firstName">
+                                First name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="firstName"
+                                id="firstName"
+                                placeholder="e.g. Ram"
+                                required
+                            >
+                        </div>
+
+
+                        <!-- AGE -->
+                        <div class="form-group">
+                            <label for="age">
+                                Age
+                                <!-- <span class="optional">(optional)</span> -->
+                            </label>
+
+                            <input
+                                name="age"
+                                type="number"
+                                id="age"
+                                placeholder="e.g. 20"
+                                min="0" max="80"
+                                required
+                            >
+                        </div>
+
+
+                        <!-- EMAIL -->
+                        <div class="form-group full">
+                            <label for="email">
+                                Email address
+                            </label>
+
+                            <input
+                                name="email"
+                                type="email"
+                                id="email"
+                                placeholder="RamSharma@example.com"
+                                required
+                            >
+                        </div>
+
+
+                        <!-- PHONE -->
+                        <div class="form-group">
+                            <label for="phone">
+                                Phone number
+                            </label>
+
+                            <input
+                                name="phone"
+                                type="tel"
+                                id="phone"
+                                placeholder="+91 98765 43210"
+                                required
+                            >
+                        </div>
+
+
+                        <!-- CITY -->
+                        <div class="form-group">
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                name="city"
+                                type="text"
+                                id="city"
+                                placeholder="e.g. New Delhi"
+                            >
+                        </div>
+
+
+                        <!-- ABOUT -->
+                        <div class="form-group full">
+                            <label for="about">
+                                A little about you
+                            </label>
+
+                            <textarea
+                                name="about"
+                                id="about"
+                                placeholder="Tell us something interesting about yourself..."
+                                required
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FORM FOOTER -->
+                    <div class="form-footer">
+
+                        <p class="privacy">
+                            Your information stays private and is only used
+                            to personalize your experience.
+                        </p>
+
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                        >
+                            Continue&nbsp; →
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="success"
+                        id="successMessage"
+                    >
+                        ✓ Your profile details have been saved successfully.
+                    </div>
+
+                </form>
+
+                <p id="error" style="color: red;"></p>
+
+            </section>
+
+        </main>
+
+    </div>
+    <script>
+    const form = document.getElementById("profileForm");
+    const error = document.getElementById("error");
+    const success = document.getElementById("successMessage");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        error.textContent = "";
+        success.style.display = "none";
+
+        try {
+            const response = await fetch("http://127.1.0.4:9080/submit", {
+                method: "POST",
+                body: new FormData(form)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                error.textContent = result.error;
+                return;
+            }
+            window.location.href = result.redirect;
+            // success.textContent = "✓ " + result.description;
+            // success.style.display = "block";
+
+            form.reset();
+
+        } catch (err) {
+            console.error(err);
+            error.textContent = "Could not connect to the backend.";
+        }
+    });
+</script>
+</body>
+</html>
