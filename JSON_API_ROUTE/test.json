@@ -10,12 +10,12 @@
     }
   },
   {
-    "name": "Ait",
+    "name": "Amit",
     "age": 30,
     "isStudent": false,
     "skills": ["Reading", "Coding"],
     "address": {
-      "city": "New York",
+      "city": "Canada",
       "zip": "10001"
     }
   }   
